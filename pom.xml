@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fsarmiento</groupId>
 	<artifactId>sample-app-for-release</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 
 	<properties>
 		<release.repo.local.dir>../maven-repo</release.repo.local.dir>
@@ -46,7 +46,7 @@
 						<version>1.4.0</version>
 						<executions>
 							<execution>
-							    <id>git-add-changes</id>
+								<id>git-add-changes</id>
 								<phase>deploy</phase>
 								<goals>
 									<goal>exec</goal>
@@ -62,7 +62,7 @@
 								</configuration>
 							</execution>
 							<execution>
-							    <id>git-commit-changes</id>
+								<id>git-commit-changes</id>
 								<phase>deploy</phase>
 								<goals>
 									<goal>exec</goal>
@@ -75,7 +75,23 @@
 										<argument>commit</argument>
 										<argument>-a</argument>
 										<argument>-m</argument>
-										<argument>"Added ${project.artifactId} ${project.version} release"</argument>
+										<argument>"Added ${project.artifactId} ${project.version}
+											release"</argument>
+									</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>git-push-changes</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>git</executable>
+									<arguments>
+										<argument>--git-dir=${release.repo.local.dir}/.git</argument>
+										<argument>--work-tree=${release.repo.local.dir}/</argument>
+										<argument>push</argument>
 									</arguments>
 								</configuration>
 							</execution>
